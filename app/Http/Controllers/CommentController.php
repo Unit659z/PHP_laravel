@@ -35,7 +35,7 @@ class CommentController extends Controller
         }
 
         $comment->accept = true;
-        $users = User::where('id', '!=', $comment->user_id)->get();
+        $users = User::where('id', '!=', $comment->auth)->get();
         if ($comment->save()) {
             Notification::send($users, new NewCommentNotify($comment->article, $comment->name));
         };
